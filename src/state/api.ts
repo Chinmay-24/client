@@ -88,7 +88,7 @@ export const api = createApi({
             query: ({projectId}) => `tasks?projectId=${projectId}`,
             providesTags: (result) => 
                 result
-                    ? result.map(({ id })) => ({type: "Tasks" as const, id}))
+                    ? result.map(({ id }) => ({type: "Tasks" as const, id}))
                     : [{type: "Tasks" as const}],
         }),
 
