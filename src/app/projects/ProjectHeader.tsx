@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import { Grid3X3 } from "lucide-react";
+import { Clock, Grid3X3, List, Table } from "lucide-react";
 import React, { useState} from "react";
 
 type Props = {
@@ -31,12 +31,28 @@ const ProjectHeader = ({activeTab, setActiveTab}: Props) => {
             />
 
             <TabButton
-            name="Board"
-            icon={<Grid 3x3 className="h-5 w-5" />}
+            name="List"
+            icon={<List className="h-5 w-5" />}
             setActiveTab={setActiveTab}
-            ac
+            activeTab={activeTab}
+            />
+
+            <TabButton
+            name="Timeline"
+            icon={<Clock className="h-5 w-5" />}
+            setActiveTab={setActiveTab}
+            activeTab={activeTab}
+            />
+
+            <TabButton
+            name="Table"
+            icon={<Table className="h-5 w-5" />}
+            setActiveTab={setActiveTab}
+            activeTab={activeTab}
+            />
 
         </div>
+        <div className="flex items-center"
     </div>
     </div>
   );
