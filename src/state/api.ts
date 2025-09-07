@@ -106,11 +106,11 @@ export const api = createApi({
             method: "PATCH",
             body: {status},
             }),
-            invalidatesTags: (result, error, { taskId}) => [
+            invalidatesTags: (result, error, { taskId }) => [
                 {type : "Tasks", id: taskId },
                 
             ],
-        })
+        }),
     }),  
 });
 
