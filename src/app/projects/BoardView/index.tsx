@@ -105,9 +105,21 @@ const TaskColumn = ({
                         </div>
                     </div>
                 </div>
-                {tasks.filter((task) => task.status === status).map((task))}
+                {tasks.filter((task) => task.status === status).map((task) => (
+                    <Task key={task.id} task={task} />
+                ))}
         </div>
     );
 };
+
+type TaskProps {
+    task: TaskType
+
+}
+
+const Task = ({task}: TaskProps) => {
+
+}
+
 
 export default BoardView;
