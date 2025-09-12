@@ -11,10 +11,12 @@
   "dependencies": {
     "@mui/x-data-grid": "^7.27.2",
     "@reduxjs/toolkit": "^2.6.1",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "lucide-react": "^0.477.0",
     "next": "15.2.0",
     "react": "^19.0.0",
+    "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",

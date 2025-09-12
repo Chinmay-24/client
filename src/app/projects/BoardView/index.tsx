@@ -1,9 +1,10 @@
 import { useGetTasksQuery, useUpdateTaskStatusMutation } from "@/state/api";
 import React from "react";
-import { DndProvider } from "react-dnd";
+import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Task as TaskType } from "@/state/api";
 import { EllipsisVertical, Plus } from "lucide-react";
+import { format } from "date-fns";
 
 type BoardProps = {
     id: string;
@@ -118,8 +119,51 @@ type TaskProps {
 }
 
 const Task = ({task}: TaskProps) => {
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: "task",
+        item:{ id: task.id},
+        collect: (monitor: any) => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    }));
+
+    const taskTagsSplit = task.tags ? task.tags.split(",") : [];
+
+    const formattedStartDate = task.startDate
+     ? format(new Date(task.startDate), "P")
+     : "";
+     const formattedDueDate = task.dueDate
+     ? format(new Date(task.dueDate), "P")
+     :"";
+
+     const numberOfComments = (task.comments && task.comments.length) || 0;
+     const PriorityTag = ({ priority}: {priority: TaskType["priority"]}) => (
+        <div
+            className={`rounded-full px-2 py-1 text-xs font-semibold ${
+                priority === "Urgent" ? "bg-red-200 text-red-700" : priority === "High" ?
+                "bg-yellow-200 text-yellow-700" : priority === "Medium" ?
+                "bg-green-200 text-gren-700" : priority ==="Low" ?
+                "bg-blue-200 text-blue-700" :
+                "bg-gray-200 text-gray-700"
+
+            } `}
+            >
+            {priority}
+        </div>
+     );
+
+     return (
+        <div
+            ref={(instance) => {
+                drag(instance)
+    
+            }}
+            className={`mb-4 rounded-md bg-white shadow dark:bg-dark-secondary ${
+                isDragging ? "opacity-50" : "opacity-100"
+            }`}
+            ></div>
+     )
+
 
 }
-
-
 export default BoardView;
