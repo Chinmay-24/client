@@ -3,8 +3,10 @@ import React from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Task as TaskType } from "@/state/api";
-import { EllipsisVertical, Image, Plus } from "lucide-react";
+import { EllipsisVertical, MessageSquare, MessageSquareMore, Plus } from "lucide-react";
 import { format } from "date-fns";
+import Image from "next/image";
+
 
 type BoardProps = {
     id: string;
@@ -113,10 +115,10 @@ const TaskColumn = ({
     );
 };
 
-type TaskProps {
+type TaskProps = {
     task: TaskType
 
-}
+};
 
 const Task = ({task}: TaskProps) => {
     const [{ isDragging }, drag] = useDrag(() => ({
@@ -210,7 +212,7 @@ const Task = ({task}: TaskProps) => {
                             <div className="flex -space-x-[6px] overflow-hidden">
                                 {task.assignee && (
                                     <Image
-                                        key={task.assignee.userId}
+                                        key={task.assignee.UserId}
                                         src={`/${task.assignee.profilePictureUrl!}`}
                                         alt={task.assignee.username}
                                         width={30}
@@ -218,10 +220,24 @@ const Task = ({task}: TaskProps) => {
                                         className="h-8 w--8 rounded-full border-2 border-white object-cover dark:border-dark:secondary"
                                         /> 
                                 )}
-                                {task assignee && (
+                                {task.author && (
                                     <Image
-                                    key={task.assignee?.UserId}
+                                    key={task.author?.UserId}
+                                    src={`/${task.author?.profilePictureUrl!}`}
+                                    alt={task.author?.username}
+                                    width={30}
+                                    height={30}
+                                    className="h-8 w--8 rounded-full border-2 border-white object-cover dark:border-dark:secondary"
+                                    />
                                 )}
+                            </div>
+                            <div className="flex items-center text-gray-500 dark:text-neutral-500">
+                                <MessageSquareMore size={20} />
+                                <span className="ml-1 text-sm dark:text-neutral-400">
+                                    {numberOfComments}
+                                </span>
+                                
+
                             </div>
                         </div>
 
