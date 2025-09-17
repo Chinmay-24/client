@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
-import { useGetTasksQuery } from '@/state/api';
+import TaskCar from "@/components/TaskCard";
+import { Task, useGetTasksQuery } from '@/state/api';
 import React from 'react'
 
 type Props = {
@@ -19,7 +20,9 @@ const ListView  = ({ id, setIsModalNewTaskOpen }: Props) => {
         <Header name="List" />
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6"></div>
-        {tasks?.map((task:Task))}
+        {tasks?.map((task:Task) => (
+            <TaskCard key={task.id} task={task} />
+        ))}
 
     </div>
     );
