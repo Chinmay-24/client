@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import TaskCard from "@/components/TaskCard";
 import { Task, useGetTasksQuery } from '@/state/api';
-import React from 'react'
+import React from "react";
 
 type Props = {
     id: string;

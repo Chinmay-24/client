@@ -53,10 +53,10 @@ const TaskCard = ({ task }: Props) => {
         {task.dueDate ? format(new Date(task.dueDate), "P"): "Not set"}
     </p>
     <p>
-        <strong>Author:</strong> {task.author ? task.author.username || "Unknown"}
+        <strong>Author:</strong>{" "} {task.author ? task.author.username || "Unknown"}
     </p>
     <p>
-        <strong>Assignee:</strong> {task.assignee ? task.assignee.username : "Unknown"}
+        <strong>Assignee:</strong> {task.assignee ? task.assignee.username : "Unassigned"}
     </p>
   </div>
   
