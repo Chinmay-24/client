@@ -28,10 +28,10 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
     const ganttTasks = useMemo(() => {
         return (
             tasks?.map((task) => ({
-                start: new Date(task.startDate as string)
-                end: new Date(task.dueDate)
-                name: task.title
-                id: `Task-${task.id}`
+                start: new Date(task.startDate as string),
+                end: new Date(task.dueDate as string),
+                name: task.title,
+                id: `Task-${task.id}`,
                 type: "task" as "TaskType",
                 progress: task.points ? (task.points /10) * 100 : 0,
                 isDisabled: false
@@ -41,11 +41,11 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
     }, [tasks]);
 
     const handleViewModeChange = (
-        event: React.ChangeEvent<HTMLSelectElement>
+        event: React.ChangeEvent<HTMLSelectElement>,
     ) => {
         setDisplayOptions((prev) => ({
-            ....prev,
-            viewmode: event.target.value as ViewMode,
+            ...prev,
+            viewMode: event.target.value as ViewMode,
         }));
     };
 
@@ -54,7 +54,33 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
 
 
   return 
-    <div className="px-4 ">Timeline</div>
+    <div className="px-4 xl:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-2 py-5">
+            <h1 className="me-2 text-lg font-bold dark:text-white">
+                Project Tasks Timeline
+            </h1>
+            <div className="relative inline-block w-64">
+                <select
+                    className="focus:shadow-outline block w-full appearance-none rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none dark:border-dark-secondary dark:bg-dark-secondary dark:text-white"
+                    value={displayOptions.viewMode}
+                    onchange={handleViewModeChange}
+                >
+                            <option value={ViewMode.Day}>Day</option>
+                            <option value={ViewMode.Week}>Week</option>
+                            <option value={ViewMode.Month}>Month</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div className="overflow-hidden rounded-md bg-white shadow dark:bg-dark-secondary dark:text-white">
+                        <div className="timeline">
+                            <Gantt
+                                tasks={}
+                        </div>
+                    </div>
+
+        
+    </div>;
   
 };
 
