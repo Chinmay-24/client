@@ -1,4 +1,5 @@
 import { useAppSelector } from "@/app/redux";
+import Header from "@/components/Header";
 import { useGetTasksQuery } from "@/state/api";
 import React from "react";
 
@@ -17,8 +18,13 @@ const TableView = ({id, setIsModalNewTaskOpen}: Props) => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error || !tasks) return <div>An error occurred while fetching taskss</div>;
-  return    <div>TableView</div>
-  
+  return (    <div className="h-[540px] w-full px-4 pb-8 xl:px-6">
+    <div className="pt-5">
+      <Header name="Table" isSmallText />
+    </div>
+    <DataGrid />
+  </div>
+  );
 };
 
 export default TableView;
