@@ -23,6 +23,8 @@ const TableView = ({id, setIsModalNewTaskOpen}: Props) => {
       <Header name="Table" isSmallText />
     </div>
     <DataGrid />
+    <div>
+      </div>
   </div>
   );
 };
