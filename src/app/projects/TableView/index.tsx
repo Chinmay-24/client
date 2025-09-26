@@ -1,12 +1,17 @@
 import { useAppSelector } from "@/app/redux";
 import Header from "@/components/Header";
 import { useGetTasksQuery } from "@/state/api";
+import {DataGrid, GridColDef } from "@mui/x-data-grid"
 import React from "react";
 
 type Props = {
   id:string;
   setIsModalNewTaskOpen: (isOpen: boolean) => void;
 };
+
+const columns: GridColDef[] = [
+  
+]
 
 const TableView = ({id, setIsModalNewTaskOpen}: Props) => {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
@@ -22,7 +27,10 @@ const TableView = ({id, setIsModalNewTaskOpen}: Props) => {
     <div className="pt-5">
       <Header name="Table" isSmallText />
     </div>
-    <DataGrid />
+    <DataGrid 
+      rows={tasks || []}
+      columns={columns}
+      />
     <div>
       </div>
   </div>
