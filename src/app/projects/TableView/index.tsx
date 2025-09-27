@@ -10,7 +10,17 @@ type Props = {
 };
 
 const columns: GridColDef[] = [
-  
+  {
+    field: "title",
+    headerName: "Tile",
+    width: 100
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 200
+  },
+
 ]
 
 const TableView = ({id, setIsModalNewTaskOpen}: Props) => {
