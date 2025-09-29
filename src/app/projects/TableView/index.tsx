@@ -24,6 +24,16 @@ const columns: GridColDef[] = [
     field: "priority",
     headerName: "Priority",
     width: 75,
+  },
+  {
+    field: "tags",
+    headerName: "Tags",
+    width:130,
+  },
+  {
+    field: "startDate",
+    headerName: "Start Date",
+    width:130,
   }
 
 ]
