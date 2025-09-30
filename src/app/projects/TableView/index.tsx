@@ -34,9 +34,27 @@ const columns: GridColDef[] = [
     field: "startDate",
     headerName: "Start Date",
     width:130,
+  },
+  {
+    field: "dueDate",
+    headerName: "Start Date",
+    width:130,
+  },
+  {
+    field: "author",
+    headerName: "Author",
+    width:150,
+    renderCell: (params) => params.value.username || "Unknown"
+  },
+  {
+    field: "assignee",
+    headerName: "Assignee",
+    width:150,
+    renderCell: (params) => params.value.username || 
   }
 
-]
+
+];
 
 const TableView = ({id, setIsModalNewTaskOpen}: Props) => {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
