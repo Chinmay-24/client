@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/app/redux";
 import Header from "@/components/Header";
+import { dataGridClassNames } from "@/lib/utils";
 import { useGetTasksQuery } from "@/state/api";
 import {DataGrid, GridColDef } from "@mui/x-data-grid"
 import React from "react";
@@ -26,10 +27,9 @@ const columns: GridColDef[] = [
     width: 130,
     renderCell: (params) => (
       <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-        
+        {params.value}
       </span>
-    )
-
+    ),
   },
   {
     field: "priority",
@@ -84,6 +84,8 @@ const TableView = ({id, setIsModalNewTaskOpen}: Props) => {
     <DataGrid 
       rows={tasks || []}
       columns={columns}
+      className={dataGridClassNames}
+      
       />
     <div>
       </div>
