@@ -85,6 +85,7 @@ const TableView = ({id, setIsModalNewTaskOpen}: Props) => {
       rows={tasks || []}
       columns={columns}
       className={dataGridClassNames}
+      classType={}
       
       />
     <div>

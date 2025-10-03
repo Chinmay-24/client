@@ -4,7 +4,10 @@ export const dataGridClassNames =
 export const dataGridSxStyles = (isDarkMode: boolean) => {
     return {
         "& .MuiDataGrid-columnHeaders": {
-            color: `${isDarkMode ? "#e5e7eb" : ""}`
+            color: `${isDarkMode ? "#e5e7eb" : ""}`,
+            '& [role="row"] > *':{
+                backgroundColor
+            }
         }
     }
 }
