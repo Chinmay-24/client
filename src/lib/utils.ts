@@ -6,8 +6,12 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
         "& .MuiDataGrid-columnHeaders": {
             color: `${isDarkMode ? "#e5e7eb" : ""}`,
             '& [role="row"] > *':{
-                backgroundColor
-            }
+                backgroundColor: `${isDarkMode ? "1d1f21" : "white"}`,
+                borderColor: `{isDarkMode ? "#e5e7eb" : ""}`
+            },
+        },
+        "& .MuiIconbutton-root": {
+            
         }
     }
 }
