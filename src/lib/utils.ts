@@ -12,6 +12,9 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
         },
         "& .MuiIconbutton-root": {
             color: `${isDarkMode ? "#a3a3a3" : ""}`,
-        }
+        },
+        "& .MuiTablePagination-root": {
+            color: `${isDarkMode ? "#a3a3a3" : ""}`,
+        },
     }
 }
