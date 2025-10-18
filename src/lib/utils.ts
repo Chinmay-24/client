@@ -7,7 +7,7 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
             color: `${isDarkMode ? "#e5e7eb" : ""}`,
             '& [role="row"] > *':{
                 backgroundColor: `${isDarkMode ? "1d1f21" : "white"}`,
-                borderColor: `{isDarkMode ? "#e5e7eb" : ""}`
+                borderColor: `{isDarkMode ? "#e5e7eb" : ""}`,
             },
         },
         "& .MuiIconbutton-root": {
@@ -16,5 +16,17 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
         "& .MuiTablePagination-root": {
             color: `${isDarkMode ? "#a3a3a3" : ""}`,
         },
-    }
-}
+        "& .MuiTablePagination-selectIcon": {
+            color: `${isDarkMode ? "#a3a3a3" : ""}`,
+        },
+        "& .MuiDataGrid-cell": {
+            border: "none",
+        },
+        "& .MuiDataGrid-row": {
+            borderBottom: `1px solid ${isDarkMode ? "#2d3135" : "e5e7eb"}`,
+        },
+        "& .MuiDataGrid-withBorderColor": {
+            borderColor: `${isDarkMode ? "#2d3135" : "e5e7eb"}`,
+        }, 
+    };
+};
