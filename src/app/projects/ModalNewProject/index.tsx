@@ -9,9 +9,8 @@ type Props = {
 
 const ModalNewProject = ({isOpen, onClose}: Props) => {
     const [createProject, {isLoading}] = useCreateProjectMutation();
-    
-  return 
-    <div>ModalNewProject</div>;
+    const [projectName, setProjectName] = use
+  return <div>ModalNewProject</div>;
 
 };
 
