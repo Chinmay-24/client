@@ -13,7 +13,7 @@ const ModalNewProject = ({isOpen, onClose}: Props) => {
     const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [teamId, setTeamId] = useState("");
+    
 
     const handleSubmit = async() => {
       if (!isProjectName || !start)
