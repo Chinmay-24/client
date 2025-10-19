@@ -1,5 +1,5 @@
 import { useCreateProjectMutation } from "@/state/api";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
     isOpen: boolean,
@@ -9,7 +9,16 @@ type Props = {
 
 const ModalNewProject = ({isOpen, onClose}: Props) => {
     const [createProject, {isLoading}] = useCreateProjectMutation();
-    const [projectName, setProjectName] = use
+    const [projectName, setProjectName] = useState("");
+    const [description, setDescription] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [teamId, setTeamId] = useState("");
+
+    const handleSubmit = async() => {
+      if (!isProjectName || !start)
+    }
+
   return <div>ModalNewProject</div>;
 
 };
