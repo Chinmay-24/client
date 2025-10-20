@@ -42,7 +42,21 @@ const ModalNewProject = ({isOpen, onClose}: Props) => {
           handleSubmit();
         }}
       >
-        
+
+        <input type="text"
+        className={inputStyles}
+        placeholder="Project Name"
+        value={projectName}
+        onChange={(e) => setProjectName(e.target.value)}
+        />
+        <textarea
+          className={inputStyles}
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setProjectName(e.target.value)}
+        />
+
+
       </form>
 
     </Modal>
