@@ -1,3 +1,4 @@
+import Modal from "@/components/Modal";
 import { useCreateProjectMutation } from "@/state/api";
 import React, { useState } from "react";
 
@@ -16,11 +17,36 @@ const ModalNewProject = ({isOpen, onClose}: Props) => {
     
 
     const handleSubmit = async() => {
-      if (!isProjectName || !start)
-    }
+      if (!projectName || !startDate || !endDate)return;
 
-  return <div>ModalNewProject</div>;
+      await createProject({
+        name: projectName,
+        description,
+        startDate,
+        endDate
+      });
+    };
 
+    const isFormValid = () => {
+      return projectName && description && startDate && endDate;
+    };
+
+    const inputStyles = "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:text-white dark:focus:outline-none";
+
+  return(
+    <Modal isOpen={isOpen} onClose={onClose} name="Create New Project">
+      <form
+        className="mt-4 space-y-6"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
+        
+      </form>
+
+    </Modal>
+  );
 };
 
 export default ModalNewProject
