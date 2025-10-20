@@ -53,9 +53,11 @@ const ModalNewProject = ({isOpen, onClose}: Props) => {
           className={inputStyles}
           placeholder="Description"
           value={description}
-          onChange={(e) => setProjectName(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         />
-
+        <div className="frid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-2">
+          <input
+            
 
       </form>
 
