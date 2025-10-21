@@ -135,7 +135,12 @@ const ModalNewTask = ({isOpen, onClose}: Props) => {
             value={assignedUserId}
             onChange={(e) => setAssignedUserId(e.target.value)}
           />
-            
+          <button
+            type="submit"
+            className={`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent bg-blue-primary px-4 py-2 yexy-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
+
+            }` }
+
         </div>
       </form>
     </Modal>
