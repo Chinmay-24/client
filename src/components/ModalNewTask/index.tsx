@@ -6,10 +6,11 @@ import Modal from '../Modal';
 type Props = {
     isOpen: boolean;
     onClose: () => void;
+    id: string;
 };
 
 
-const ModalNewTask = ({isOpen, onClose}: Props) => {
+const ModalNewTask = ({isOpen, onClose, id}: Props) => {
     const [ createTask, {isLoading} ] = useCreateTaskMutation();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -22,7 +23,7 @@ const ModalNewTask = ({isOpen, onClose}: Props) => {
     const [assignedUserId, setAssignedUserId] = useState("");
 
     const handleSubmit = async () => {
-      if (!title) return;
+      if (!title || !authorUserId) return;
 
       const formattedStartDate = formatISO(new Date(startDate), {
         representation: "complete",
@@ -40,12 +41,14 @@ const ModalNewTask = ({isOpen, onClose}: Props) => {
         startDate: formattedStartDate,
         dueDate: formattedDueDate,
         authorUserId: parseInt(authorUserId),
-        assignedUserId: parseInt(assignedUserId)    
+        assignedUserId: parseInt(assignedUserId),
+        projectId: Number(id),
+
       });
     };
 
     const isFormValid = () => {
-      return title;
+      return title && authorUserId;
     };
 
     const selectStyles = 
@@ -121,6 +124,7 @@ const ModalNewTask = ({isOpen, onClose}: Props) => {
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
           />
+          </div>
           <input
             type="date"
             className={inputStyles}
@@ -128,6 +132,7 @@ const ModalNewTask = ({isOpen, onClose}: Props) => {
             value={authorUserId}
             onChange={(e) => setAuthorUserId(e.target.value)}
           />
+          
           <input
             type="text"
             className={inputStyles}
@@ -138,15 +143,20 @@ const ModalNewTask = ({isOpen, onClose}: Props) => {
           <button
             type="submit"
             className={`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent bg-blue-primary px-4 py-2 yexy-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
+              !isFormValid() || isLoading ? "cursor-not-allowed opacity-50" : ""
+            }`}
+            disabled={!isFormValid() || isLoading}
+          >
+            {isLoading ? "Creating..." : "Create Task"}
 
-            }` }
-
-        </div>
+          </button>
+          
+      
       </form>
     </Modal>
 
     
-  )
-}
+  );
+};
 
-export default ModalNewTask
+export default ModalNewTask;
