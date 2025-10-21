@@ -1,6 +1,7 @@
 import { Priority, Status, useCreateTaskMutation } from '@/state/api';
-import { formatISO } from 'date-fns/fp';
+import { formatISO } from "date-fns";
 import React, { useState } from 'react'
+import Modal from '../Modal';
 
 type Props = {
     isOpen: boolean;
@@ -9,7 +10,7 @@ type Props = {
 
 
 const ModalNewTask = ({isOpen, onClose}: Props) => {
-    const [ createTask ] = useCreateTaskMutation();
+    const [ createTask, {isLoading} ] = useCreateTaskMutation();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [status, setStatus] = useState<Status>(Status.ToDo);
@@ -26,7 +27,7 @@ const ModalNewTask = ({isOpen, onClose}: Props) => {
       const formattedStartDate = formatISO(new Date(startDate), {
         representation: "complete",
       });
-      const formattedEnDate = formatISO(new Date(dueDate), {
+      const formattedDueDate = formatISO(new Date(dueDate), {
         representation: "complete",
       });
 
@@ -104,8 +105,38 @@ const ModalNewTask = ({isOpen, onClose}: Props) => {
           className={inputStyles}
           placeholder="Tags(comma separated)"
           value={tags}
-          onChange={(e) => setStartDate(e.target.value)}
+          onChange={(e) => setTags(e.target.value)}
         />
+        
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-2">
+          <input
+            type="date"
+            className={inputStyles}
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <input
+            type="date"
+            className={inputStyles}
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
+          <input
+            type="date"
+            className={inputStyles}
+            placeholder="Author User ID"
+            value={authorUserId}
+            onChange={(e) => setAuthorUserId(e.target.value)}
+          />
+          <input
+            type="text"
+            className={inputStyles}
+            placeholder="Assigned User ID"
+            value={assignedUserId}
+            onChange={(e) => setAssignedUserId(e.target.value)}
+          />
+            
+        </div>
       </form>
     </Modal>
 
