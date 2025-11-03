@@ -1,12 +1,15 @@
 "use client"
-import React from 'react'
+import { useSearchQuery } from "@/state/api";
+import React from "react";
 
-type Props = {}
 
-const Search = (props: Props) => {
-  return (
+const Search = () => {
+    const [searchTerm, setSearchTerm] = useState("");
+    const { data: searchResults, isLoading, isError} = useSearchQuery( searchTerm, {})
+    
+    return 
     <div>Search</div>
-  )
-}
 
-export default Search
+};
+
+export default Search;
