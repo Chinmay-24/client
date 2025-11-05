@@ -1,5 +1,6 @@
 "use client"
 import Header from "@/components/Header";
+import TaskCard from "@/components/TaskCard";
 import { useSearchQuery } from "@/state/api";
 import { debounce } from "lodash";
 import React, { useEffect, useState } from "react";
@@ -30,7 +31,21 @@ const Search = () => {
         <div className="p-5">
             {isLoading && <p>Loading...</p>}
             {isError && <p>Error occured while fetching search results.</p>}
-            {}
+            {!isLoading && !isError && searchResults && (
+                <div>
+                    {searchResults.tasks && searchResults.tasks?.length > 0 && (
+                        <h2>Tasks</h2>
+                    )}
+                    {searchResults.tasks?.map((task) => (
+                        <TaskCard key={task.id} task={task} />
+                    ))}
+
+                    {searchResults.projects && searchResults.projects?.length > 0 && (
+                        <h2>Projects</h2>
+                    )}
+                    {searchResults.projects?.map((task))}
+                </div>
+            )}
         </div>
     </div>
 
