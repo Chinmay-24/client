@@ -43,7 +43,17 @@ const Search = () => {
                     {searchResults.projects && searchResults.projects?.length > 0 && (
                         <h2>Projects</h2>
                     )}
-                    {searchResults.projects?.map((task))}
+                    {searchResults.projects?.map((task) => (
+                        <ProjectCard key={project.id} project={project} />
+            
+                    ))}
+                
+                    {searchResults.users && searchResults.users?.length > 0 && (
+                    <h2>Users</h2>
+                )}
+                {searchResults.users?.map((user) => (
+                    <UserCard key={user.userId} user={user} />
+                ))}
                 </div>
             )}
         </div>
