@@ -1,5 +1,6 @@
 "use client"
 import Header from "@/components/Header";
+import ProjectCard from "@/components/ProjectCard";
 import TaskCard from "@/components/TaskCard";
 import { useSearchQuery } from "@/state/api";
 import { debounce } from "lodash";
