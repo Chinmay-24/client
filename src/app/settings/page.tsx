@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import React from 'react'
 
 const Settings = () => {
@@ -9,11 +10,26 @@ const Settings = () => {
     }
 
     const labelStyles ="block text-sm font-medium dark:text-white";
-    const textStyles = "mt-1 block w-full border border-gray-300 rounded-md shadow-sm";
+    const textStyles = "mt-1 block w-full border border-gray-300 rounded-md shadow-sm dark: text-white";
 
-  return 
-    <div>Settings</div>
-  
+
+  return ( 
+    <div className="p-8">
+      <Header name="Settings" />
+      <div className="space-y-4">
+        <div>
+          <label className={labelStyles}>Username</label>
+          <div className={textStyles}>{userSettings.username}</div>
+        </div>
+        <div>
+          <label className={labelStyles}>Email</label>
+          <div className={textStyles}>{userSettings.email}</div>
+        </div>
+      </div>
+    
+
+    </div>
+  );
 };
 
-export default Settings
+export default Settings;
