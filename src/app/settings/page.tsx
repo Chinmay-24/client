@@ -25,6 +25,14 @@ const Settings = () => {
           <label className={labelStyles}>Email</label>
           <div className={textStyles}>{userSettings.email}</div>
         </div>
+        <div>
+          <label className={labelStyles}>Team</label>
+          <div className={textStyles}>{userSettings.teamName}</div>
+        </div>
+        <div>
+          <label className={labelStyles}>Role</label>
+          <div className={textStyles}>{userSettings.roleName}</div>
+        </div>
       </div>
     
 
