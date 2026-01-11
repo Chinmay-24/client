@@ -29,8 +29,6 @@ export const getTasks = async (
     }
 };
 
-
-
 export const createTask = async (
     req: Request,
     res: Response
