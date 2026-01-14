@@ -120,8 +120,8 @@ export const api = createApi({
         getUser: build.query<User[], void>({
             query: () => "users",
             providesTags: ["Users"]
-        })
-        search:  build.query<SearchResults, string>({
+        }),
+        search: build.query<SearchResults, string>({
             query: (query) => `search?query=${query}`,
         }),
     }),  
