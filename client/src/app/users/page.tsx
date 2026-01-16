@@ -45,7 +45,7 @@ const Users = () => {
   if (isLoading) return <div> Loading...</div>
   if (isError || !users) return <div>Error fetching users</div>
 
-  return <div className="flex w-full flex-col p-8">
+  return ( <div className="flex w-full flex-col p-8">
     <Header name="Users" />
     <div style={{height: 650, width:100%}}>
       <DataGrid
@@ -61,6 +61,7 @@ const Users = () => {
         sx={dataGridSxStyles(isDarkMode)}
       />
     </div>
-  </div>;
+  </div>
+  );
 };
 export default Users;
