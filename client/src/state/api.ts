@@ -68,8 +68,8 @@ export interface SearchResults {
     tasks?: Task[];
     projects?: Project[];
     users?: User[];
-
 }
+
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
