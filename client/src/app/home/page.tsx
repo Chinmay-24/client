@@ -38,7 +38,7 @@ const HomePage = () => {
         },
         {},
     );
-  return <div>HomePage</div>;
+  
   
   const projectStatus = Object.keys(statusCount).map((key) => ({
         name: key,
@@ -46,8 +46,23 @@ const HomePage = () => {
     }));
 
     const taskColumns: GridColDef[] = [
-        {field: "title", headerName: "Title", width: 200}
-    ]
+        {field: "title", headerName: "Title", width: 200},
+        {field: "status", headerName: "Status", width: 150},
+        {field: "priority", headerName: "Priority", width: 150},
+        {field: "dueDate", headerName: "Due Date", width: 150}, 
+
+    ];
+    const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+    const chartColors = isDarkMode
+        ? {
+            bar: "#8884d8",
+            barGrid:"#303030",
+            pieFill: ""
+
+
+        }
+
+    return <div>HomePage</div>;
 };
 
 export default HomePage;
