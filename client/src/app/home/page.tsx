@@ -3,6 +3,18 @@ import { Priority, Project, Task, useGetProjectsQuery, useGetTasksQuery } from "
 import React from "react";
 import { useAppSelector } from "../redux";
 import { GridColDef } from "@mui/x-data-grid";
+import Header from "@/components/Header";
+import { BarChart } from "lucide-react";
+
+const taskColumns: GridColDef[] = [
+        {field: "title", headerName: "Title", width: 200},
+        {field: "status", headerName: "Status", width: 150},
+        {field: "priority", headerName: "Priority", width: 150},
+        {field: "dueDate", headerName: "Due Date", width: 150}, 
+
+    ];
+    const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+    
 
 const HomePage = () => {
     const { data: tasks,
@@ -45,24 +57,62 @@ const HomePage = () => {
         const: statusCount[key],
     }));
 
-    const taskColumns: GridColDef[] = [
-        {field: "title", headerName: "Title", width: 200},
-        {field: "status", headerName: "Status", width: 150},
-        {field: "priority", headerName: "Priority", width: 150},
-        {field: "dueDate", headerName: "Due Date", width: 150}, 
-
-    ];
-    const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
     const chartColors = isDarkMode
         ? {
             bar: "#8884d8",
             barGrid:"#303030",
-            pieFill: ""
+            pieFill: "#4A90E2",
+            text: "#FFFFFF",
+        } : {
+            bar: "#8884d8",
+            barGrid:"#E0E0E0",
+            pieFill: "#82ca9d",
+            text: "#000000",
+        };
 
+    return ( <div className="container h-full w-[100%] bg-gray-100 bg-transparent p-8">
+                <Header name ="Project Management Dashboard" />
+                <div className="grid grid-cols-1 gao-4 md:grid md:grid-cols-2">
+                    <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
+                        <h3 className="mb-4 text-lg fornt-semibold dark: text-white">
+                            Task Priority Distribution
+                        </h3>
+                        <ResponsiveContainer width="100%" height={300} >
+                            <BarChart data={taskDistribution}>
+                                <CartesianGrid strokeDasharray="3 3" stroke={chartColors.barGrid}/>
+                                <XAxis datakey="name" stroke={chartColors.text} />
+                                <YAxis stroke={chartColors.text}/>
+                                <Tooltip contentStyle={{
+                                    width:"min-content",
+                                    height: "min-content",
+                                }}/>
+                                <Legend />
+                                <Bar dataKey="count" fill={chartColors.bar}/>
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
 
-        }
-
-    return <div>HomePage</div>;
+                    <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
+                        <h3 className="mb-4 text-lg fornt-semibold dark: text-white">
+                            Project Status
+                        </h3>
+                        <ResponsiveContainer width="100%" height={300} >
+                            <BarChart data={taskDistribution}>
+                                <CartesianGrid strokeDasharray="3 3" stroke={chartColors.barGrid}/>
+                                <XAxis datakey="name" stroke={chartColors.text} />
+                                <YAxis stroke={chartColors.text}/>
+                                <Tooltip contentStyle={{
+                                    width:"min-content",
+                                    height: "min-content",
+                                }}/>
+                                <Legend />
+                                <Bar dataKey="count" fill={chartColors.bar}/>
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+            </div>
+    );
 };
 
 export default HomePage;
