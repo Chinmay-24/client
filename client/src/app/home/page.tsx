@@ -4,7 +4,7 @@ import React from "react";
 import { useAppSelector } from "../redux";
 import { GridColDef } from "@mui/x-data-grid";
 import Header from "@/components/Header";
-import { BarChart } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const taskColumns: GridColDef[] = [
         {field: "title", headerName: "Title", width: 200},
@@ -80,7 +80,7 @@ const HomePage = () => {
                         <ResponsiveContainer width="100%" height={300} >
                             <BarChart data={taskDistribution}>
                                 <CartesianGrid strokeDasharray="3 3" stroke={chartColors.barGrid}/>
-                                <XAxis datakey="name" stroke={chartColors.text} />
+                                <XAxis dataKey="name" stroke={chartColors.text} />
                                 <YAxis stroke={chartColors.text}/>
                                 <Tooltip contentStyle={{
                                     width:"min-content",
@@ -97,19 +97,22 @@ const HomePage = () => {
                             Project Status
                         </h3>
                         <ResponsiveContainer width="100%" height={300} >
-                            <BarChart data={taskDistribution}>
-                                <CartesianGrid strokeDasharray="3 3" stroke={chartColors.barGrid}/>
-                                <XAxis datakey="name" stroke={chartColors.text} />
-                                <YAxis stroke={chartColors.text}/>
-                                <Tooltip contentStyle={{
-                                    width:"min-content",
-                                    height: "min-content",
-                                }}/>
+                            <PieChart>
+                                <Pie dataKey="count" data = {projectStatus} fill="#82ca9d" label>
+                                    {projectStatus.map((entry,index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length ]} />
+                                    ))}    
+                                </Pie>                                
+                                <Tooltip />
                                 <Legend />
-                                <Bar dataKey="count" fill={chartColors.bar}/>
-                            </BarChart>
+                            </PieChart>
                         </ResponsiveContainer>
                     </div>
+                    <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary md:col-span-2">
+                        <h3 className="mb-4 text-lg fornt-semibold dark: text-white">
+                            Your Tasks
+                        </h3>
+                        <div style={{height: 300 , width:"100%"}}></div>
                 </div>
             </div>
     );
