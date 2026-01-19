@@ -2,9 +2,10 @@
 import { Priority, Project, Task, useGetProjectsQuery, useGetTasksQuery } from "@/state/api";
 import React from "react";
 import { useAppSelector } from "../redux";
-import { GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Header from "@/components/Header";
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
 
 const taskColumns: GridColDef[] = [
         {field: "title", headerName: "Title", width: 200},
@@ -112,7 +113,19 @@ const HomePage = () => {
                         <h3 className="mb-4 text-lg fornt-semibold dark: text-white">
                             Your Tasks
                         </h3>
-                        <div style={{height: 300 , width:"100%"}}></div>
+                        <div style={{height: 400 , width:"100%"}}>
+                            <DataGrid
+                                rows={tasks}
+                                columns={taskColumns}
+                                checkboxSelection
+                                loading={tasksLoading}
+                                getRowClassName={() => "data-grid-row"}
+                                getCellClassName={() => "data-grid-cell"}
+                                className={dataGridClassNames}
+                                sx={dataGridSxStyles(isDarkMode)}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
     );
