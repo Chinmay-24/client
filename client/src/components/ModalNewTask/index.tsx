@@ -1,16 +1,16 @@
 import { Priority, Status, useCreateTaskMutation } from '@/state/api';
 import { formatISO } from "date-fns";
 import React, { useState } from 'react'
-import Modal from '../Modal';
+import Modal from "@/components/Modal";
 
 type Props = {
     isOpen: boolean;
     onClose: () => void;
-    id: string;
+    id?: string | null;
 };
 
 
-const ModalNewTask = ({isOpen, onClose, id}: Props) => {
+const ModalNewTask = ({isOpen, onClose, id = null}: Props) => {
     const [ createTask, {isLoading} ] = useCreateTaskMutation();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
