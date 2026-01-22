@@ -22,7 +22,7 @@ const ReusablePriorityPage = ({priority}: Props) => {
 
     const filteredTasks = tasks?.filter((task:Task) => task.priority ===priority,);
 
-    return (isTasksError || !tasks) return <div>Error fetching tasks</div>;
+    if (isTasksError || !tasks) return <div>Error fetching tasks</div>;
 
     return <div className="m-5 p-4">
         <ModalNewTask isOpen={isModalNewTaskOpen} onClose={() => setIsModalNewTaskOpen(false)} />
