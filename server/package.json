@@ -29,7 +29,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@prisma/client": "^6.19.2",
+    "@prisma/client": "^7.5.0",
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",

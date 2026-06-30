@@ -8,7 +8,7 @@ import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveCo
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
 
 const taskColumns: GridColDef[] = [
-        {field: "title", headerName: "Title", width: 200},
+        {field: "title", headerName: "Title", width: 200 },
         {field: "status", headerName: "Status", width: 150},
         {field: "priority", headerName: "Priority", width: 150},
         {field: "dueDate", headerName: "Due Date", width: 150}, 
@@ -25,7 +25,7 @@ const HomePage = () => {
     const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
     if (tasksLoading || isProjectsLoading) return <div> Loading...</div>;
-    if (tasksError || !tasks || !projects ) return <div>Error Fecthing Data </div>;
+    if (tasksError || !tasks || !projects ) return <div>Error Fetching Data </div>;
 
     const  priorityCount = tasks.reduce(
         (acc: Record<string, number>,task: Task) => {
