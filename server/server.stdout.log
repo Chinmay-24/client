@@ -1,0 +1,5 @@
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Server running on port 8000
+127.0.0.1 - - [31/Jul/2026:13:04:24 +0000] "GET /projects HTTP/1.1" 200 1579
+127.0.0.1 - - [31/Jul/2026:13:05:40 +0000] "GET /projects HTTP/1.1" 200 1579
+127.0.0.1 - - [31/Jul/2026:13:05:40 +0000] "GET /tasks?projectId=1 HTTP/1.1" 200 2
