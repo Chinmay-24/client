@@ -4,31 +4,38 @@ import ProjectCard from "@/components/ProjectCard";
 import TaskCard from "@/components/TaskCard";
 import UserCard from "@/components/UserCard";
 import { useSearchQuery } from "@/state/api";
-import { debounce } from "lodash";
 import React, { useEffect, useState } from "react";
 
-
 const Search = () => {
+    const [inputValue, setInputValue] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-    const { data: searchResults, isLoading, isError} = useSearchQuery( searchTerm, {
-        skip: searchTerm.length <3,
+    const { data: searchResults, isLoading, isError } = useSearchQuery(searchTerm, {
+        skip: searchTerm.length < 3,
     });
 
-    const handleSearch = debounce(
-        (event: React.ChangeEvent<HTMLInputElement>) => {
-            setSearchTerm(event.target.value)
-        },
-        500,
-    );
-
     useEffect(() => {
-        return handleSearch.cancel;
-    }, [handleSearch.cancel]);
-    
+        if (inputValue.trim().length < 3) {
+            setSearchTerm("");
+            return;
+        }
+
+        const timer = window.setTimeout(() => {
+            setSearchTerm(inputValue);
+        }, 500);
+
+        return () => window.clearTimeout(timer);
+    }, [inputValue]);
+
     return <div className="p-8">
         <Header name="Search" />
         <div>
-            <input type="text" placeholder="Search..." className="w-1/2 rounded border p-3 shadow" onChange={handleSearch} />
+            <input
+                type="text"
+                placeholder="Search..."
+                className="w-1/2 rounded border p-3 shadow"
+                value={inputValue}
+                onChange={(event) => setInputValue(event.target.value)}
+            />
         </div>
         <div className="p-5">
             {isLoading && <p>Loading...</p>}
@@ -45,22 +52,20 @@ const Search = () => {
                     {searchResults.projects && searchResults.projects?.length > 0 && (
                         <h2>Projects</h2>
                     )}
-                    {searchResults.projects?.map((task) => (
+                    {searchResults.projects?.map((project) => (
                         <ProjectCard key={project.id} project={project} />
-            
                     ))}
-                
+
                     {searchResults.users && searchResults.users?.length > 0 && (
-                    <h2>Users</h2>
-                )}
-                {searchResults.users?.map((user) => (
-                    <UserCard key={user.userId} user={user} />
-                ))}
+                        <h2>Users</h2>
+                    )}
+                    {searchResults.users?.map((user) => (
+                        <UserCard key={user.UserId} user={user} />
+                    ))}
                 </div>
             )}
         </div>
     </div>
-
 };
 
 export default Search;

@@ -2,11 +2,8 @@
 import React, { useMemo, useState } from 'react';
 import { useAppSelector } from '../redux';
 import { useGetProjectsQuery } from '@/state/api';
-import { DisplayOption, Gantt, ViewMode } from 'gantt-task-react';
-import { previousDay } from 'date-fns';
+import { DisplayOption, Gantt, Task as GanttTask, ViewMode } from 'gantt-task-react';
 import Header from '@/components/Header';
-
-type TaskTypeItems = "task" | "milestone" | "project";
 
 
 const Timeline = () => {
@@ -18,7 +15,7 @@ const Timeline = () => {
       locale: "en-US",
     });
 
-    const ganttTasks = useMemo(() => {
+    const ganttTasks = useMemo<GanttTask[]>(() => {
       return (
         projects?.map((project) => ({
           start: new Date(project.startDate as string),
@@ -27,22 +24,18 @@ const Timeline = () => {
           id: `Project-${project.id}`,
           progress: 50,
           isDisabled: false,
-
-          
+          type: 'project' as const,
         })) || []
       );
     }, [projects]);
 
     const handleViewModeChange = (
-      event:React.ChangeEvent<HTMLSelectElement>,
-
+      event: React.ChangeEvent<HTMLSelectElement>,
     ) => {
-      setDisplayOptions((prev)) => ({
+      setDisplayOptions((prev) => ({
         ...prev,
         viewMode: event.target.value as ViewMode,
-
       }));
-
     };
 
     if (isLoading) return <div>Loading...</div>

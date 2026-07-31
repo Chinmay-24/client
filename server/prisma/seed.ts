@@ -2,9 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
 const prisma = new PrismaClient();
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
+const __filename = path.resolve(process.cwd(), "prisma/seed.ts");
 const __dirname = path.dirname(__filename);
 
 async function deleteAllData(orderedFileNames: string[]) {

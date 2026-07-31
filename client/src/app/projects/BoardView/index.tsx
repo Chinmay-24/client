@@ -3,7 +3,7 @@ import React from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Task as TaskType } from "@/state/api";
-import { EllipsisVertical, MessageSquare, MessageSquareMore, Plus } from "lucide-react";
+import { EllipsisVertical, MessageSquareMore, Plus } from "lucide-react";
 import { format } from "date-fns";
 import Image from "next/image";
 
@@ -57,17 +57,21 @@ const TaskColumn = ({
     moveTask,
     setIsModalNewTaskOpen,
 }: TaskColumnProps) => {
-    const [{ isOver}, drop] = useDrop(() => ({
+    const [{ isOver }, drop] = useDrop<
+        { id: number },
+        void,
+        { isOver: boolean }
+    >(() => ({
         accept: "task",
-        drop: (item: {id: number }) => moveTask(item.id, status),
-        collect: (monitor: any) => ({
-            isOver: !!monitor.isOver()
-        })
+        drop: (item) => moveTask(item.id, status),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver(),
+        }),
     }));
 
-    const tasksCount = tasks. filter((task) => task.status === status).length;
+    const tasksCount = tasks.filter((task) => task.status === status).length;
 
-    const statusColor: any = {
+    const statusColor: Record<string, string> = {
         "To Do": "#2563EB",
         "Work In Progress": "#059669",
         "Under Review": "#D97706",
@@ -121,10 +125,14 @@ type TaskProps = {
 };
 
 const Task = ({task}: TaskProps) => {
-    const [{ isDragging }, drag] = useDrag(() => ({
+    const [{ isDragging }, drag] = useDrag<
+        { id: number },
+        void,
+        { isDragging: boolean }
+    >(() => ({
         type: "task",
-        item:{ id: task.id},
-        collect: (monitor: any) => ({
+        item: { id: task.id },
+        collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
     }));
@@ -213,21 +221,21 @@ const Task = ({task}: TaskProps) => {
                                 {task.assignee && (
                                     <Image
                                         key={task.assignee.UserId}
-                                        src={`/${task.assignee.profilePictureUrl!}`}
+                                        src={`/${task.assignee.profilePictureUrl ?? "default-avatar.png"}`}
                                         alt={task.assignee.username}
                                         width={30}
                                         height={30}
                                         className="h-8 w--8 rounded-full border-2 border-white object-cover dark:border-dark:secondary"
-                                        /> 
+                                    />
                                 )}
                                 {task.author && (
                                     <Image
-                                    key={task.author?.UserId}
-                                    src={`/${task.author?.profilePictureUrl!}`}
-                                    alt={task.author?.username}
-                                    width={30}
-                                    height={30}
-                                    className="h-8 w--8 rounded-full border-2 border-white object-cover dark:border-dark:secondary"
+                                        key={task.author.UserId}
+                                        src={`/${task.author.profilePictureUrl ?? "default-avatar.png"}`}
+                                        alt={task.author.username}
+                                        width={30}
+                                        height={30}
+                                        className="h-8 w--8 rounded-full border-2 border-white object-cover dark:border-dark:secondary"
                                     />
                                 )}
                             </div>

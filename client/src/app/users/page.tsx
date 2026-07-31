@@ -39,7 +39,7 @@ const columns: GridColDef[] = [
 ]
 
 const Users = () => {
-  const {data: users, isLoading, isError} = useGetUsersQuery();
+  const { data: users, isLoading, isError } = useGetUserQuery();
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
   if (isLoading) return <div> Loading...</div>
@@ -47,7 +47,7 @@ const Users = () => {
 
   return ( <div className="flex w-full flex-col p-8">
     <Header name="Users" />
-    <div style={{height: 650, width:100%}}>
+    <div style={{ height: 650, width: '100%' }}>
       <DataGrid
         rows={users || []}
         columns={columns}

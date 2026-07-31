@@ -6,7 +6,7 @@ type Props = {
     user: User
 }
 
-const index = ({user}: Props) => {
+const UserCard = ({user}: Props) => {
   return (
     <div className="flex items-center rounded border p-4 shadow">
         {user.profilePictureUrl && (
