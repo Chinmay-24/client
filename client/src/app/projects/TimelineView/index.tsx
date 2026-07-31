@@ -1,8 +1,7 @@
 import { useAppSelector } from '@/app/redux';
 import { useGetTasksQuery } from '@/state/api';
 import { DisplayOption, Gantt, ViewMode } from "gantt-task-react";
-import "gantt-task-react/dist/index.css"
-import { type } from 'os';
+import "gantt-task-react/dist/index.css";
 import React, { useMemo, useState } from "react";
 
 type Props = {
@@ -54,7 +53,7 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
     if (error) return <div>An error occured while fetching tasks</div>;
 
 
-  return 
+  return (
     <div className="px-4 xl:px-6">
         <div className="flex flex-wrap items-center justify-between gap-2 py-5">
             <h1 className="me-2 text-lg font-bold dark:text-white">
@@ -95,8 +94,8 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
                     </div>
 
         
-    </div>;
-  
+    </div>
+  );
 };
 
 export default Timeline;
