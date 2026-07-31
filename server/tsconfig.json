@@ -7,15 +7,15 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "ESNext",
-    "moduleResolution": "NodeNext",
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "target": "es2022",
     "lib": ["ESNext"],
     "strict": true,
     "types": ["node"],    
     "esModuleInterop": true,
     
-    "rootDir": "./src",
+    "rootDir": ".",
     "resolveJsonModule": true,
     
     "forceConsistentCasingInFileNames": true,

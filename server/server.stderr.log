@@ -1,0 +1,20 @@
+node:internal/modules/cjs/loader:692
+      throw e;
+      ^
+
+Error: Cannot find module 'C:\Users\techm\Projectmanager\server\node_modules\@prisma\client\runtime\library.js'
+    at createEsmNotFoundErr (node:internal/modules/cjs/loader:1493:15)
+    at finalizeEsmResolution (node:internal/modules/cjs/loader:1482:9)
+    at resolveExports (node:internal/modules/cjs/loader:685:14)
+    at Module._findPath (node:internal/modules/cjs/loader:752:31)
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1441:27)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
+    at Module._load (node:internal/modules/cjs/loader:1242:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12) {
+  code: 'MODULE_NOT_FOUND',
+  path: 'C:\\Users\\techm\\Projectmanager\\server\\node_modules\\@prisma\\client'
+}
+
+Node.js v24.14.0
