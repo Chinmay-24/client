@@ -71,10 +71,12 @@ export interface SearchResults {
 }
 
 export interface Team {
-    teamId: number;
+    id: number;
     teamName: string;
-    productOwnerUserId?:number;
-    productManagerUserId? : number;
+    productOwnerUserId?: number | null;
+    projectManagerUserId?: number | null;
+    productOwnerUsername?: string | null;
+    projectManagerUsername?: string | null;
 }
 
 export const api = createApi({
@@ -136,7 +138,7 @@ export const api = createApi({
         }),
 
         getTeams: build.query<Team[], void>({
-            query: () => "users",
+            query: () => "teams",
             providesTags: ["Teams"]
         }),
         search: build.query<SearchResults, string>({
