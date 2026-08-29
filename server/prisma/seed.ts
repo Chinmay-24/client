@@ -1,19 +1,18 @@
-import { PrismaClient } from "@prisma/client";
-import fs from "fs";
-import path from "path";
-const prisma = new PrismaClient();
+const { PrismaClient } = require("@prisma/client");
+const fs = require("fs");
+const path = require("path");
 
-const __filename = path.resolve(process.cwd(), "prisma/seed.ts");
-const __dirname = path.dirname(__filename);
+const prisma = new PrismaClient();
+const __dirname = path.resolve(process.cwd(), "prisma");
 
 async function deleteAllData(orderedFileNames: string[]) {
-  const modelNames = orderedFileNames.map((fileName) => {
+  const modelNames = orderedFileNames.map((fileName: string) => {
     const modelName = path.basename(fileName, path.extname(fileName));
     return modelName.charAt(0).toUpperCase() + modelName.slice(1);
   });
 
   for (const modelName of modelNames) {
-    const model: any = prisma[modelName as keyof typeof prisma];
+    const model = prisma[modelName];
     try {
       await model.deleteMany({});
       console.log(`Cleared data from ${modelName}`);
@@ -43,7 +42,7 @@ async function main() {
     const filePath = path.join(dataDirectory, fileName);
     const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
     const modelName = path.basename(fileName, path.extname(fileName));
-    const model: any = prisma[modelName as keyof typeof prisma];
+    const model = prisma[modelName];
 
     try {
       for (const data of jsonData) {
