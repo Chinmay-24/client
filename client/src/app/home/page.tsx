@@ -37,9 +37,9 @@ const HomePage = () => {
         {},
     );
     
-    const taskDistribution = Object.keys(priorityCount).map((key) => ({
+    const taskDistribution = Object.entries(priorityCount).map(([key, count]) => ({
         name: key,
-        const: priorityCount[key],
+        count,
     }));
 
     const  statusCount = projects.reduce(
@@ -53,9 +53,9 @@ const HomePage = () => {
     );
   
   
-  const projectStatus = Object.keys(statusCount).map((key) => ({
+  const projectStatus = Object.entries(statusCount).map(([key, count]) => ({
         name: key,
-        const: statusCount[key],
+        count,
     }));
 
     const chartColors = isDarkMode
@@ -73,58 +73,76 @@ const HomePage = () => {
 
     return ( <div className="container h-full w-[100%] bg-gray-100 bg-transparent p-8">
                 <Header name ="Project Management Dashboard" />
-                <div className="grid grid-cols-1 gao-4 md:grid md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
-                        <h3 className="mb-4 text-lg fornt-semibold dark: text-white">
+                        <h3 className="mb-4 text-lg font-semibold dark:text-white">
                             Task Priority Distribution
                         </h3>
-                        <ResponsiveContainer width="100%" height={300} >
-                            <BarChart data={taskDistribution}>
-                                <CartesianGrid strokeDasharray="3 3" stroke={chartColors.barGrid}/>
-                                <XAxis dataKey="name" stroke={chartColors.text} />
-                                <YAxis stroke={chartColors.text}/>
-                                <Tooltip contentStyle={{
-                                    width:"min-content",
-                                    height: "min-content",
-                                }}/>
-                                <Legend />
-                                <Bar dataKey="count" fill={chartColors.bar}/>
-                            </BarChart>
-                        </ResponsiveContainer>
+                        {taskDistribution.length > 0 ? (
+                            <ResponsiveContainer width="100%" height={300} >
+                                <BarChart data={taskDistribution}>
+                                    <CartesianGrid strokeDasharray="3 3" stroke={chartColors.barGrid}/>
+                                    <XAxis dataKey="name" stroke={chartColors.text} />
+                                    <YAxis stroke={chartColors.text}/>
+                                    <Tooltip contentStyle={{
+                                        width:"min-content",
+                                        height: "min-content",
+                                    }}/>
+                                    <Legend />
+                                    <Bar dataKey="count" fill={chartColors.bar}/>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        ) : (
+                            <div className="flex h-[300px] items-center justify-center text-sm text-gray-500 dark:text-gray-300">
+                                No task data available yet.
+                            </div>
+                        )}
                     </div>
 
                     <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
-                        <h3 className="mb-4 text-lg fornt-semibold dark: text-white">
+                        <h3 className="mb-4 text-lg font-semibold dark:text-white">
                             Project Status
                         </h3>
-                        <ResponsiveContainer width="100%" height={300} >
-                            <PieChart>
-                                <Pie dataKey="count" data = {projectStatus} fill="#82ca9d" label>
-                                    {projectStatus.map((entry,index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length ]} />
-                                    ))}    
-                                </Pie>                                
-                                <Tooltip />
-                                <Legend />
-                            </PieChart>
-                        </ResponsiveContainer>
+                        {projectStatus.length > 0 ? (
+                            <ResponsiveContainer width="100%" height={300} >
+                                <PieChart>
+                                    <Pie dataKey="count" data = {projectStatus} fill="#82ca9d" label>
+                                        {projectStatus.map((entry,index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length ]} />
+                                        ))}    
+                                    </Pie>                                
+                                    <Tooltip />
+                                    <Legend />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        ) : (
+                            <div className="flex h-[300px] items-center justify-center text-sm text-gray-500 dark:text-gray-300">
+                                No project status data available yet.
+                            </div>
+                        )}
                     </div>
                     <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary md:col-span-2">
-                        <h3 className="mb-4 text-lg fornt-semibold dark: text-white">
+                        <h3 className="mb-4 text-lg font-semibold dark:text-white">
                             Your Tasks
                         </h3>
-                        <div style={{height: 400 , width:"100%"}}>
-                            <DataGrid
-                                rows={tasks}
-                                columns={taskColumns}
-                                checkboxSelection
-                                loading={tasksLoading}
-                                getRowClassName={() => "data-grid-row"}
-                                getCellClassName={() => "data-grid-cell"}
-                                className={dataGridClassNames}
-                                sx={dataGridSxStyles(isDarkMode)}
-                            />
-                        </div>
+                        {tasks.length > 0 ? (
+                            <div style={{height: 400 , width:"100%"}}>
+                                <DataGrid
+                                    rows={tasks}
+                                    columns={taskColumns}
+                                    checkboxSelection
+                                    loading={tasksLoading}
+                                    getRowClassName={() => "data-grid-row"}
+                                    getCellClassName={() => "data-grid-cell"}
+                                    className={dataGridClassNames}
+                                    sx={dataGridSxStyles(isDarkMode)}
+                                />
+                            </div>
+                        ) : (
+                            <div className="flex h-[200px] items-center justify-center text-sm text-gray-500 dark:text-gray-300">
+                                No tasks found for this project yet.
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
